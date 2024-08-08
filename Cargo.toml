@@ -1,0 +1,26 @@
+[package]
+name = "bevy_ui_effect"
+version = "0.0.1"
+authors = ["Trung Do <dothanhtrung@pm.me>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = ""
+keywords = ["bevy"]
+description = ""
+exclude = ["assets", "examples", "tests", ".cargo"]
+categories = ["game-development"]
+
+[dependencies]
+bevy = { version = "0.14", features = [], default-features = false }
+
+[dev-dependencies]
+bevy = { version = "0.14", features = [
+    "bevy_ui",
+    "bevy_winit",
+    "dynamic_linking",
+    "wayland",
+], default-features = false }
+
+[features]
+default = ["state"]
+state = ["bevy/bevy_state"]
