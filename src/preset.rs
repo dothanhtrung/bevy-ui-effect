@@ -10,11 +10,6 @@ impl UiEffect {
             scale_sequence: ScaleSequence {
                 sequence: vec![
                     NextTransform {
-                        value: Vec3::new(1., 1., 1.),
-                        speed: 0.,
-                        display_time_ms: 300,
-                    },
-                    NextTransform {
                         value: scale,
                         speed: 0.09,
                         display_time_ms: 200,
