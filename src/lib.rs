@@ -8,7 +8,7 @@ pub mod preset;
 use bevy::app::{App, Plugin, Update};
 
 #[cfg(feature = "state")]
-use bevy::prelude::{in_state, States, IntoSystemConfigs};
+use bevy::prelude::{in_state, IntoSystemConfigs, States};
 use bevy::prelude::{Commands, Component, Entity, Query, Res, Time, Transform, Vec3};
 
 macro_rules! plugin_systems {
@@ -64,7 +64,8 @@ impl Plugin for UiEffectPluginNoState {
 }
 
 pub trait TransformSequence {
-    fn animated(&self, transform: &mut Transform, time_delta_ms: u128);
+    fn animated(&mut self, transform: &mut Transform, time_delta_ms: u128);
+
     fn is_finished(&self) -> bool;
 }
 
@@ -92,6 +93,9 @@ pub struct TransitionSequence {
 
 impl TransformSequence for ScaleSequence {
     fn animated(&mut self, transform: &mut Transform, time_delta_ms: u128) {
+        if self.sequence.is_empty() {
+            return;
+        }
         let target_scale = &self.sequence[self.phase];
         if transform.scale == target_scale.value {
             if self.displayed_time_ms >= target_scale.display_time_ms {
@@ -141,6 +145,10 @@ impl TransformSequence for ScaleSequence {
 
 impl TransformSequence for TransitionSequence {
     fn animated(&mut self, transform: &mut Transform, time_delta_ms: u128) {
+        if self.sequence.is_empty() {
+            return;
+        }
+
         let target_transition = &self.sequence[self.phase];
         if transform.translation == target_transition.value {
             if self.displayed_time_ms >= target_transition.display_time_ms {
