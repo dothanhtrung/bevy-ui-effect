@@ -23,4 +23,5 @@ Compatible Bevy Versions
 
 | bevy | bevy_ui_effect         |
 |------|------------------------|
-| 0.14 | 0.0.1, branch `master` |
+| 0.15 | 0.0.2, branch `master` |
+| 0.14 | 0.0.1                  |
