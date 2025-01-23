@@ -1,6 +1,6 @@
-use bevy::color::palettes::basic::RED;
-use bevy::DefaultPlugins;
+use bevy::color::palettes::tailwind::RED_900;
 use bevy::prelude::*;
+use bevy::DefaultPlugins;
 use bevy_ui_effect::{UiEffect, UiEffectPlugin};
 
 #[derive(Clone, Debug, Default, Eq, PartialEq, Hash, States)]
@@ -19,18 +19,15 @@ fn main() {
 }
 
 fn setup(mut commands: Commands) {
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d);
 
     commands.spawn((
-        NodeBundle {
-            style: Style {
-                width: Val::Percent(20.),
-                height: Val::Percent(20.),
-                ..default()
-            },
-            background_color: RED.into(),
+        Node {
+            width: Val::Percent(20.),
+            height: Val::Percent(20.),
             ..default()
         },
+        BackgroundColor::from(RED_900),
         UiEffect::popup(Vec3::new(9., 9., 9.)),
     ));
 }
